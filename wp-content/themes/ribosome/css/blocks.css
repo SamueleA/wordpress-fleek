@@ -1,0 +1,24 @@
+*[class^="wp-block-"] {margin-bottom: 28px;margin-bottom: 2.8rem;}
+p.has-text-color a {text-decoration: underline;}
+p.has-drop-cap {overflow: hidden;}
+.wp-block-spacer {clear: both;margin: 0;}
+.editor-styles-wrapper img {box-shadow: none !important;border-radius: 0 !important;}
+.has-light-gray-color, a.has-light-gray-color, a.has-light-gray-color:hover {color: #f2f2f2;}
+.has-medium-gray-color, a.has-medium-gray-color, a.has-medium-gray-color:hover {color: #999;}
+.has-dark-gray-color, a.has-dark-gray-color, a.has-dark-gray-color:hover {color: #333;}
+.has-white-color, a.has-white-color, a.has-white-color:hover {color: #fff;}
+.has-light-gray-background-color {background-color: #f2f2f2;}
+.has-medium-gray-background-color {background-color: #999;}
+.has-dark-gray-background-color {background-color: #333;}
+.has-white-background-color {background-color: #fff;}
+.has-small-font-size {font-size: 14px;}
+.has-normal-font-size {font-size: 16px;}
+.has-large-font-size {font-size: 20px;}
+.has-medium-font-size {font-size: 20px;}
+.has-huge-font-size {font-size: 24px;}
+.wp-block-button.alignleft {margin-right: 14px;}
+.wp-block-button.alignright {margin-left: 14px;}
+.wp-block-button__link {padding: 7px 18px;}
+.wp-block-button__link:hover {opacity: .8;}
+.wp-block-media-text *:last-child {margin-bottom: 0;}
+.wp-block-embed.aligncenter * {margin: 0 auto;}

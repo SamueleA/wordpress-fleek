@@ -1,0 +1,8 @@
+.wp-block {max-width: 797px;}
+.wp-block-spacer {clear: both;margin: 0;}
+p.has-text-color a {text-decoration: underline;}
+p.has-drop-cap {overflow: hidden;}
+.wp-block-button.alignleft {margin-right: 14px;}
+.wp-block-button.alignright {margin-left: 14px;}
+.wp-block-button__link {padding: 7px 18px;}
+.wp-block-button__link:hover {opacity: .8;}
