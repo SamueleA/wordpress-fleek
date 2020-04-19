@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>tutorial &#8211; Code Climbing</title>
+	<atom:link href="http://OFFLINEZIP.wpshotag/tutorial/feed/" rel="self" type="application/rss+xml" />
+	<link>https://OFFLINEZIP.wpsho</link>
+	<description>Samuele Agostinelli&#039;s Blog - Reaching the Heights</description>
+	<lastBuildDate>Mon, 30 Mar 2020 01:53:46 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4</generator>
+
+<image>
+	<url>http://OFFLINEZIP.wpshowp-content/uploads/2020/03/cropped-favicon-32x32.png</url>
+	<title>tutorial &#8211; Code Climbing</title>
+	<link>https://OFFLINEZIP.wpsho</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Docker for Newbz: Create a Docker Image for Your App!</title>
+		<link>http://OFFLINEZIP.wpshodocker-for-newbz-create-a-docker-image-for-your-app/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=docker-for-newbz-create-a-docker-image-for-your-app</link>
+					<comments>http://OFFLINEZIP.wpshodocker-for-newbz-create-a-docker-image-for-your-app/#respond</comments>
+		
+		<dc:creator><![CDATA[TheCodeClimber]]></dc:creator>
+		<pubDate>Mon, 30 Mar 2020 01:15:33 +0000</pubDate>
+				<category><![CDATA[Docker]]></category>
+		<category><![CDATA[docker]]></category>
+		<category><![CDATA[tutorial]]></category>
+		<guid isPermaLink="false">http://OFFLINEZIP.wpsho?p=60</guid>
+
+					<description><![CDATA[Every programmer dreads the phrase: &#8220;But it works on my machine!!!&#8221; Our poor developer now knows that he must now figure out what&#8217;s wrong among a bazillion things. &#8220;Okay, so... <a href="http://OFFLINEZIP.wpshodocker-for-newbz-create-a-docker-image-for-your-app/">Read more &#187;</a>]]></description>
+										<content:encoded><![CDATA[
+<figure class="wp-block-image size-large"><img src="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ-1024x819.png" alt="" class="wp-image-66" srcset="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ-1024x819.png 1024w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ-300x240.png 300w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ-768x614.png 768w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ-624x499.png 624w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/1_9hGvYE5jegHm1r_97gH-jQ.png 1240w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>Fellow newb, welcome to Docker!</figcaption></figure>
+
+
+
+<p>Every programmer dreads the phrase: &#8220;But it works on my machine!!!&#8221; Our poor developer now knows that he must now figure out what&#8217;s wrong among a bazillion things. &#8220;Okay, so what&#8217;s your OS? I hope there&#8217;s not a quirk with the OS. What about your node version? Maybe the app only works with this specific node version. Etc&#8230;&#8221;<br><br>Just thinking about it wakes up my problem-solving PTSD developed from many wasted hours trying to figure out what&#8217;s wrong with a setup.<br><br>And that&#8217;s where Docker comes in. Docker sets a common environment that never changes for us to run our app into. If it works on my machine with the Docker image&#8230; it will work on yours!<br><br>In this tutorial, we&#8217;ll create a simple create-react-application and then we&#8217;ll run it in a Docker Container. <br><br>Container? Image? Are you confused? You&#8217;re at the right place because this tutorial is for newbz with a z at the end.<br><br>Let&#8217;s get started.<br><br><strong>Docker Image vs Docker Container</strong><br>Just to clarify this real quick. A docker container is an instance of a docker image. In the same manner that a built house (container) is an instance of the architect&#8217;s plans (image).<br><br>Simple, right?<br><br>NEXT!<br><br><strong>Making our First Image</strong><br><br>I just want to say that in this tutorial I am assuming you have everything installed already. You should have Node.js, create-react-app and Docker. You&#8217;re a big boy. I know you can do that without me. Install all that and come back.<br><br>So to start, we&#8217;ll create a simple React application.<br></p>
+
+
+
+<pre class="wp-block-code"><code>npx create-react-app my-app
+cd my-app</code></pre>
+
+
+
+<p>Cool now we got a React application. Our goal with this tutorial will be to run &#8220;npm run start&#8221; and then see our web page while it runs in the container.<br><br>Now, we want to create a Docker Image. How do we do that? We must specify instructions to give to Docker on how to build the image. This is done in a <em>Dockerfile</em>.<br>Create an empty file inside the React application and call it &#8220;Dockerfile&#8221;.<br><br>Now, let&#8217;s fill that Dockerfile. The comment on top of the line will explain what it does</p>
+
+
+
+<pre class="wp-block-code"><code># This is the base image. In this case, we are taking a Linux image with node 11. This image is pulled from Docker Hub. https://hub.docker.com/_/node/
+FROM node:11
+
+# This will be the directory in which commands such as COPY and RUN will be run.
+WORKDIR /app
+
+#This means we copy everything in the current folder (our React application) into the folder defined previously in WORKDIR
+COPY . .
+
+# RUN means we run commands in the command line during build time. In this case, we have npm, because it is included in the base docker image. If we didn't have it, we'd have to use RUN to run commands to install node.
+RUN npm install
+
+# CMD defines a run-time operation. In this case we want to start the webserver
+CMD ["npm", "run", "start"]
+</code></pre>
+
+
+
+<p>Did we make a mistake while creating our Dockerfile? Let&#8217;s try building our image!</p>
+
+
+
+<pre class="wp-block-code"><code>docker build . -t my-app</code></pre>
+
+
+
+<p>The command above builds the image from the content of the Dockerfile (since I am assuming the current directory is the one containing the app). The argument &#8220;-t my-app&#8221; means we want to give our image the tag &#8220;my-app&#8221;, which will let us refer to our image more easily. After letting the build run, the command line shows:<br></p>
+
+
+
+<pre class="wp-block-code"><code>Successfully built 82322ef0e172
+Successfully tagged my-app:latest</code></pre>
+
+
+
+<p>That means success! &#8220;82322ef0e172&#8221; is the image id and &#8220;my-app&#8221; is the tag we defined above in the build command.</p>
+
+
+
+<p>Remember the difference between IMAGE and CONTAINER describe above? Right now we have an image, not a container. We got the plans of the house, we just need to build it so our app can live in it!</p>
+
+
+
+<pre class="wp-block-code"><code>docker run -dit -p 3000:3000 --name my-app --rm my-app</code></pre>
+
+
+
+<p>Let&#8217;s dissect the command above.<br>-dit : This will run our container in detached mode running in the background after execution of the commands in the Dockerfile. Without -dit, the container wouldn&#8217;t still be running. It would stop as soon as all the commands are run.<br><br>-p 3000: 3000 : This maps port 3000 on our local machine to port 3000 on our docker container. 3000 is the port that the create-react-app web server runs on by default.<br><br>&#8211;name my-app: This is the name we want to give to our container<br><br>&#8211;rm: This means we wants to delete the container once it has stopped running.<br><br>my-app: The name of the image that will serve as basis for the container<br><br>Now do:</p>
+
+
+
+<pre class="wp-block-code"><code>docker ps</code></pre>
+
+
+
+<p>This will list all the running containers. You should be able to see a container name my-app alongside other information such as the container id.<br><br>The last step is to admire our final result. Go to http://localhost:3000 and you will see your app running!</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48-1024x534.png" alt="" class="wp-image-64" srcset="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48-1024x534.png 1024w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48-300x156.png 300w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48-768x400.png 768w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48-624x325.png 624w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Screenshot-from-2020-03-29-10-40-48.png 1514w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>This is the React application running from inside our docker container!</figcaption></figure>
+
+
+
+<p><strong>Have fun!</strong><br>Docker is an important technology to know about so I hope this was useful to you! Also, here is a github with the react app and dockerfile used in this tutorial: <a href="https://github.com/SamueleA/docker-tutorial">https://github.com/SamueleA/docker-tutorial</a></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://OFFLINEZIP.wpshodocker-for-newbz-create-a-docker-image-for-your-app/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

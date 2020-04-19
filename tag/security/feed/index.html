@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>security &#8211; Code Climbing</title>
+	<atom:link href="http://OFFLINEZIP.wpshotag/security/feed/" rel="self" type="application/rss+xml" />
+	<link>https://OFFLINEZIP.wpsho</link>
+	<description>Samuele Agostinelli&#039;s Blog - Reaching the Heights</description>
+	<lastBuildDate>Mon, 30 Mar 2020 01:53:04 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.4</generator>
+
+<image>
+	<url>http://OFFLINEZIP.wpshowp-content/uploads/2020/03/cropped-favicon-32x32.png</url>
+	<title>security &#8211; Code Climbing</title>
+	<link>https://OFFLINEZIP.wpsho</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>The IPFS Holy Grail Part 1: A More Secure and Efficient Internet</title>
+		<link>http://OFFLINEZIP.wpshothe-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=the-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet</link>
+					<comments>http://OFFLINEZIP.wpshothe-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/#comments</comments>
+		
+		<dc:creator><![CDATA[TheCodeClimber]]></dc:creator>
+		<pubDate>Mon, 16 Mar 2020 02:40:29 +0000</pubDate>
+				<category><![CDATA[IPFS]]></category>
+		<category><![CDATA[internet]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[web]]></category>
+		<guid isPermaLink="false">http://OFFLINEZIP.wpsho?p=36</guid>
+
+					<description><![CDATA[Last week we&#8217;ve discussed some of the problems related to our current iteration of the internet. It was pretty doom and gloom, but now we&#8217;ll discuss what IPFS will do... <a href="http://OFFLINEZIP.wpshothe-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/">Read more &#187;</a>]]></description>
+										<content:encoded><![CDATA[
+<figure class="wp-block-image size-large is-resized"><img src="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-1024x750.jpg" alt="" class="wp-image-45" width="767" height="561" srcset="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-1024x750.jpg 1024w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-300x220.jpg 300w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-768x562.jpg 768w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-1536x1125.jpg 1536w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920-624x457.jpg 624w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/evening-567840_1920.jpg 1920w" sizes="(max-width: 767px) 100vw, 767px" /><figcaption>IPFS is coming&#8230;</figcaption></figure>
+
+
+
+<p><br><a href="http://OFFLINEZIP.wpshowhy-the-internet-is-falling-apart-and-the-need-for-ipfs/">Last week</a> we&#8217;ve discussed some of the problems related to our current iteration of the internet. It was pretty doom and gloom, but now we&#8217;ll discuss what IPFS will do to solve those problems, and thus, let us see the light at the end of the internet tunnel.<br><br>As a quick recap, here are the four problems we&#8217;ve identified with the internet last week: 1. its shaky security 2. its inefficiency in supplying increasing demand from users 3. it&#8217;s crippling centralisation 4. its proneness to censorship.</p>
+
+
+
+<p>We will discuss security and efficiency. Let&#8217;s dive in!</p>
+
+
+
+<p><strong>Security: No Need to Trust Anyone</strong></p>
+
+
+
+<p>IPFS promises a secure internet by removing the necessity of trusting the honesty of a third-party. As such, all IPFS data is self-certifying, which simply means that the user is able to determine by himself that the data he receives is trustworthy.<br><br>The secret to this self-certification comes from the power of hashing functions. Hashing functions are special mathematical entities which, if inputted data, will output a unique fingerprint called <em>the</em> <em>hash</em>. <br><br>And by unique, we truly mean unique.</p>
+
+
+
+<p>Theses functions are engineered in such a manner that it is so ridiculously improbable to find two pieces of data producing the same result, that it becomes in practice impossible to produce a forgery of the initial data.<br></p>
+
+
+
+<p>The hash is to data what a fingerprint is to a human. It uniquely identifies an individual. However, we cannot reconstruct a person from a fingerprint. This means that the hash is a unique identifier that does not compromise the privacy of the original data. One cannot reproduce the data from the hash alone.<br></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Untitled-Diagram.png" alt="" class="wp-image-46" srcset="http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Untitled-Diagram.png 759w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Untitled-Diagram-300x67.png 300w, http://OFFLINEZIP.wpshowp-content/uploads/2020/03/Untitled-Diagram-624x139.png 624w" sizes="(max-width: 759px) 100vw, 759px" /><figcaption>A hash function turns data into a unique fingerprint</figcaption></figure>
+
+
+
+<p><br>Okay, so there&#8217;s this computer sciency math stuff&#8230; but what does it have to do with IPFS?</p>
+
+
+
+<p>In HTTP, when the user, let&#8217;s say, goes to codeclimbing.com (a blog I highly recommend!! :D), the browser fetches the data at the LOCATION of the server of codeclimbing.com. This location can be spoofed by hackers. Maybe one can intercept the request and instead of sending the blog, he sends a phishing website trying to get a user&#8217;s password&#8230;<br></p>
+
+
+
+<p>But with IPFS, the users will not ask for codeclimbing.com, but instead for a hash which looks something like this: QmTkzDwWqPbnAh5YiV5VwcTLnGdwSNsNTn2aDxdXBFca7D.<br></p>
+
+
+
+<p>Supposing a hacker intercepted the request for QmTkzDwWqPbnAh5YiV5VwcTLnGdwSNsNTn2aDxdXBFca7D and tried to send a malicious phishing site, the user could run the received data through a hashing function, compare the hash of the received data with the requested hash, and reject the incoming data on the basis that the hashes do not match.<br><br>The evil hacker’s plan has been thwarted!</p>
+
+
+
+<p>The consequences of such a scheme are immense. Data integrity is ALWAYS preserved.<br><br>If a user requests a legal document, not a single letter of that document will be different. If a user downloads a program, not a single 1 or a single 0 will differ. If the user requests a picture, every pixel will be at the exact same location, an interesting property in a time of deep fakes, where the authenticity of a picture can be difficult to ascertain.<br><br>This focus on using hashing functions to fetch data is called CONTENT addressing (because the content is hashed) as opposed to the aforementioned LOCATION addressing. I think you’ll agree, it’s way more secure that way.<br><br>That being said, there’s another important property that content addressing unlocks. And it&#8217;s&#8230;</p>
+
+
+
+<p><strong>Efficiency &amp; Speed: The Digital Lamborghini</strong><br><br>There&#8217;s something missing from the explanation above which you might have already picked up on if you were exceptionally astute: since users ask for data based on the hash of its content instead of its location, how do we know where to find this data at all? Where IS the data? In which server exactly?</p>
+
+
+
+<p>The answer is that the data can be anywhere. IPFS is a peer-to-peer network in which ANYONE can contribute. You can think of it like BitTorrent, the protocol often used to distribute pirated movies and songs.</p>
+
+
+
+<p>And since anyone can distribute data, a user in the US, for example, doesn&#8217;t have to ask data to a faraway server in China, he can simply take this data from someone else near his geographical location, and vice-versa for the other way around. This is much more efficient, especially if the data is right next to the user, geographically speaking.<br><br>Suppose there is a room filled with 100 HTTP users and 100 IPFS users and they all want to go to codeclimbing.com (because it&#8217;s such a great blog! :D), how will their experiences differ?<br><br>The 100 HTTP users will make a request to the LOCATION of codeclimbing.com. Each of those requests, will go through the internet, bounce through a bunch of routers, until finally arriving at a server which is, in all probability, from Google and 1000s of kilometers away, the requested data is then sent from the server, bouncing back through a bunch of routers again, to finally arrive in the user&#8217;s hands.</p>
+
+
+
+<p>What does the request look like, from the point of view of the IPFS users? The 100 IPFS users make a request to the IPFS network for the hash of the data. What if someone in the room has the file? Why bother going through routers and to a potentially remote server? That geographically near user can share it with another user and that user can share it with another one, and another one.<br><br>Content addressing is clearly much more efficient location addressing in this case! And of course, it&#8217;s all done in secure manner.</p>
+
+
+
+<p><strong>On the Next Episode of&#8230;.</strong></p>
+
+
+
+<p>It is possible to keep going deeper with those topics, but we will keep it at that for now. Hopefully, you had a good taste of what the distributed internet has to offer!<br><br>Come back next week and we will continue this discussion about how IPFS will solve two other problems of the Internet: centralisation and proneness to censorship.</p>
+
+
+
+<p><br></p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://OFFLINEZIP.wpshothe-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/feed/</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

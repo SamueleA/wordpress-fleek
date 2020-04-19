@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>The IPFS Holy Grail Part 1: A More Secure and Efficient Internet – Code Climbing</title>
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+<link href="https://fonts.gstatic.com" crossorigin rel="preconnect">
+
+
+
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-40477212-4';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-40477212-4', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+<style type="text/css" id="kt_global_css_variables">
+:root {
+  --Denim: #1B6AC1;
+  --PictonBlue: #63B0E4;
+}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="../wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-theme-css" href="../wp-includes/css/dist/block-library/theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="mc4wp-form-themes-css" href="../wp-content/plugins/mailchimp-for-wp/assets/css/form-themes.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-fonts-css" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-style-css" href="../wp-content/themes/ribosome/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-block-style-css" href="../wp-content/themes/ribosome/css/blocks.css" type="text/css" media="all">
+
+<link rel="stylesheet" id="dashicons-css" href="../wp-includes/css/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="../wp-content/themes/ribosome/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+<style id="kt_central_palette_gutenberg_css" type="text/css">.has-central-palette-1-color{color:#1B6AC1}.has-central-palette-1-background-color{background-color:#1B6AC1}.has-central-palette-2-color{color:#63B0E4}.has-central-palette-2-background-color{background-color:#63B0E4}
+</style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"http:\/\/PLACEHOLDER.wpsho","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js"></script>
+<script type="text/javascript" src="../wp-includes/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../wp-includes/js/jquery/jquery-migrate.min.js"></script>
+
+
+
+
+
+
+
+
+
+	<style type="text/css">
+		a {color: #0073AA;}
+	a:hover {color: #0073AA;}
+	.social-icon-wrapper a:hover {color: #0073AA;}
+	.toggle-search {color: #0073AA;}
+	.prefix-widget-title {color: #0073AA;}
+	.sub-title a:hover {color:#0073AA;}
+	.entry-content a:visited,.comment-content a:visited {color:#0073AA;}
+	button, input[type="submit"], input[type="button"], input[type="reset"] {background-color:#0073AA !important;}
+	.bypostauthor cite span {background-color:#0073AA;}
+	.entry-header .entry-title a:hover {color:#0073AA ;}
+	.archive-header {border-left-color:#0073AA;}
+	.main-navigation .current-menu-item > a,
+	.main-navigation .current-menu-ancestor > a,
+	.main-navigation .current_page_item > a,
+	.main-navigation .current_page_ancestor > a {color: #0073AA;}
+	.main-navigation li a:hover  {color: #0073AA;}
+
+	.widget-area .widget a:hover {
+		color: #0073AA !important;
+	}
+	footer[role="contentinfo"] a:hover {
+		color: #0073AA;
+	}
+	.author-info a {color: #0073AA;}
+	.entry-meta a:hover {
+	color: #0073AA;
+	}
+	.format-status .entry-header header a:hover {
+		color: #0073AA;
+	}
+	.comments-area article header a:hover {
+		color: #0073AA;
+	}
+	a.comment-reply-link:hover,
+	a.comment-edit-link:hover {
+		color: #0073AA;
+	}
+	.currenttext, .paginacion a:hover {background-color:#0073AA;}
+	.aside{border-left-color:#0073AA !important;}
+	blockquote{border-left-color:#0073AA;}
+	.logo-header-wrapper{background-color:#0073AA;}
+	h3.cabeceras-fp {border-bottom-color:#0073AA;}
+	.encabezados-front-page {background-color:#0073AA;}
+	.icono-caja-destacados {color: #0073AA;}
+	.enlace-caja-destacados:hover {background-color: #0073AA;}
+	h2.comments-title {border-left-color:#0073AA;}
+	/* Gutenberg */
+	.has-theme-color-color,
+	a.has-theme-color-color:hover {
+		color: #0073AA;
+	}
+	.has-theme-color-background-color {
+		background-color:#0073AA;
+	}
+
+	
+			.blog-info-sin-imagen {background-color: #0073AA;}
+	
+			.widget-title-tab{
+			background-color:#0073AA;
+			color:#fff;
+		}
+		.widget-title-tab a.rsswidget{color:#fff !important;}
+		h3.widget-title { border-bottom:2px solid #0073AA;}
+	
+	
+			.main-navigation {border-top:2px solid #0073AA}
+	
+			.logo-header-wrapper {
+			padding: 21px 14px;
+			padding: 1.5rem 1rem;
+		}
+	
+	
+	
+	
+		body.custom-font-enabled {font-family: "Open Sans", Arial, Verdana;}
+
+			@media screen and (min-width: 768px) {
+			#primary {float:left;}
+			#secondary {float:right;}
+			.site-content {
+				border-left: none;
+				padding-left:0;
+				padding-right: 24px;
+				padding-right:1.714285714285714rem;
+			}
+
+		}
+		@media screen and (min-width: 960px) {
+			.site-content {
+				border-right: 1px solid #e0e0e0;
+			}
+		}
+	
+	@media screen and (min-width: 768px) {
+			.excerpt-wrapper{border-left:2px solid #0073AA;}
+	
+	
+		}
+	</style>
+
+	<style type="text/css" id="ribosome-header-css">
+			.site-header h1 a,
+		.site-header h2 {
+			color: #eaeaea;
+		}
+		</style>
+	<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #afafaf; }
+</style>
+	<link rel="icon" href="../wp-content/uploads/2020/03/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="../wp-content/uploads/2020/03/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="../wp-content/uploads/2020/03/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="../wp-content/uploads/2020/03/cropped-favicon-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			.logo-header-wrapper {
+	background-color: black;
+	max-height: 300px;
+	padding: 0;
+	padding-top: 10px;
+}
+
+.header-image {
+	width: auto;
+	max-height: 300px
+}		</style>
+		</head>
+
+<body class="post-template-default single single-post postid-36 single-format-standard custom-background wp-embed-responsive custom-font-enabled single-author">
+
+<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar">
+		
+		<div class="boton-menu-movil"><i class="fa fa-align-justify"></i></div>
+
+		
+		<div class="toggle-search"><i class="fa fa-search"></i></div>
+		<div class="social-icon-wrapper">
+			
+			
+			
+			
+			
+			
+			
+			
+					</div>
+	</div>
+
+	<div class="wrapper-search-top-bar">
+		<div class="search-top-bar">
+				<div>
+		<form method="get" id="searchform-toggle" action="http://OFFLINEZIP.wpsho/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search" name="s" id="s">
+			<input type="submit" name="submit" id="btn-search" value="Search">
+		</form>
+    </div>		</div>
+	</div>
+			<div style="position:relative">
+				
+<div id="menu-movil">
+	<div class="search-form-movil">
+		<form method="get" id="searchform-movil" action="http://OFFLINEZIP.wpsho/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search-movil" placeholder="Search..." name="s" id="s">
+			<input type="submit" name="submit" id="btn-search-movil" value="Search">
+		</form>
+	</div>
+	<div class="menu-movil-enlaces">
+		<div class="nav-menu"><ul>
+<li><a href="../index.html">Home</a></li><li class="page_item page-item-11"><a href="../contact/index.html">Contact</a></li>
+</ul></div>
+	</div>
+
+	<div class="social-icon-wrapper-movil">
+			
+			
+			
+			
+			
+			
+			
+			
+					</div>	
+</div>
+			</div>
+			<div class="logo-header-wrapper" style="text-align:center;">
+			<a href="../index.html"><img src="../wp-content/uploads/2020/03/cropped-Code-Climbing-scaled-2.jpg" class="header-image" width="2000" height="1034" alt="Code Climbing"></a>
+			</div>
+
+			
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div class="nav-menu"><ul>
+<li><a href="../index.html">Home</a></li><li class="page_item page-item-11"><a href="../contact/index.html">Contact</a></li>
+</ul></div>
+		</nav>
+
+	</header>
+
+	<div id="main" class="wrapper">
+
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-36" class="post-36 post type-post status-publish format-standard has-post-thumbnail hentry category-ipfs tag-internet tag-ipfs tag-security tag-web">
+						<header class="entry-header">
+					<div class="entry-title-subtitle">
+													<h1 class="entry-title">The IPFS Holy Grail Part 1: A More Secure and Efficient Internet</h1>
+						
+						
+						<div class="sub-title">
+							<div class="autor-fecha">
+								<span class="autor-in-full-posts"><i class="fa fa-user"></i> <span class="author vcard"><a class="fn" rel="author" href="../author/batonenbois/index.html">TheCodeClimber</a></span></span>
+								<span class="fecha-in-full-posts">
+									  <i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2020-03-16T02:40:29+00:00">March 16, 2020</time> <time class="updated" style="display:none;" datetime="2020-03-30T01:53:04+00:00">March 30, 2020</time>								</span>
+								<span class="comments-in-full-posts">
+									  <i class="fa fa-comment-o"></i> <a href="../the-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/#comments">2 Comments<span class="screen-reader-text"> on The IPFS Holy Grail Part 1: A More Secure and Efficient Internet</span></a>								</span>
+							</div>
+						</div>
+					</div>
+				</header>
+		
+		
+					<div class="sub-title-widget-area">
+							</div>
+		
+		
+			<div class="entry-content">
+				
+<figure class="wp-block-image size-large is-resized"><img src="../wp-content/uploads/2020/03/evening-567840_1920-1024x750.jpg" alt="" class="wp-image-45" width="767" height="561" srcset="../wp-content/uploads/2020/03/evening-567840_1920-1024x750.jpg 1024w,../wp-content/uploads/2020/03/evening-567840_1920-300x220.jpg 300w,../wp-content/uploads/2020/03/evening-567840_1920-768x562.jpg 768w,../wp-content/uploads/2020/03/evening-567840_1920-1536x1125.jpg 1536w,../wp-content/uploads/2020/03/evening-567840_1920-624x457.jpg 624w,../wp-content/uploads/2020/03/evening-567840_1920.jpg 1920w" sizes="(max-width: 767px) 100vw, 767px"><figcaption>IPFS is coming…</figcaption></figure>
+
+
+
+<p><br><a href="../why-the-internet-is-falling-apart-and-the-need-for-ipfs/index.html">Last week</a> we’ve discussed some of the problems related to our current iteration of the internet. It was pretty doom and gloom, but now we’ll discuss what IPFS will do to solve those problems, and thus, let us see the light at the end of the internet tunnel.<br><br>As a quick recap, here are the four problems we’ve identified with the internet last week: 1. its shaky security 2. its inefficiency in supplying increasing demand from users 3. it’s crippling centralisation 4. its proneness to censorship.</p>
+
+
+
+<p>We will discuss security and efficiency. Let’s dive in!</p>
+
+
+
+<p><strong>Security: No Need to Trust Anyone</strong></p>
+
+
+
+<p>IPFS promises a secure internet by removing the necessity of trusting the honesty of a third-party. As such, all IPFS data is self-certifying, which simply means that the user is able to determine by himself that the data he receives is trustworthy.<br><br>The secret to this self-certification comes from the power of hashing functions. Hashing functions are special mathematical entities which, if inputted data, will output a unique fingerprint called <em>the</em> <em>hash</em>. <br><br>And by unique, we truly mean unique.</p>
+
+
+
+<p>Theses functions are engineered in such a manner that it is so ridiculously improbable to find two pieces of data producing the same result, that it becomes in practice impossible to produce a forgery of the initial data.<br></p>
+
+
+
+<p>The hash is to data what a fingerprint is to a human. It uniquely identifies an individual. However, we cannot reconstruct a person from a fingerprint. This means that the hash is a unique identifier that does not compromise the privacy of the original data. One cannot reproduce the data from the hash alone.<br></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="../wp-content/uploads/2020/03/Untitled-Diagram.png" alt="" class="wp-image-46" srcset="../wp-content/uploads/2020/03/Untitled-Diagram.png 759w,../wp-content/uploads/2020/03/Untitled-Diagram-300x67.png 300w,../wp-content/uploads/2020/03/Untitled-Diagram-624x139.png 624w" sizes="(max-width: 759px) 100vw, 759px"><figcaption>A hash function turns data into a unique fingerprint</figcaption></figure>
+
+
+
+<p><br>Okay, so there’s this computer sciency math stuff… but what does it have to do with IPFS?</p>
+
+
+
+<p>In HTTP, when the user, let’s say, goes to codeclimbing.com (a blog I highly recommend!! :D), the browser fetches the data at the LOCATION of the server of codeclimbing.com. This location can be spoofed by hackers. Maybe one can intercept the request and instead of sending the blog, he sends a phishing website trying to get a user’s password…<br></p>
+
+
+
+<p>But with IPFS, the users will not ask for codeclimbing.com, but instead for a hash which looks something like this: QmTkzDwWqPbnAh5YiV5VwcTLnGdwSNsNTn2aDxdXBFca7D.<br></p>
+
+
+
+<p>Supposing a hacker intercepted the request for QmTkzDwWqPbnAh5YiV5VwcTLnGdwSNsNTn2aDxdXBFca7D and tried to send a malicious phishing site, the user could run the received data through a hashing function, compare the hash of the received data with the requested hash, and reject the incoming data on the basis that the hashes do not match.<br><br>The evil hacker’s plan has been thwarted!</p>
+
+
+
+<p>The consequences of such a scheme are immense. Data integrity is ALWAYS preserved.<br><br>If a user requests a legal document, not a single letter of that document will be different. If a user downloads a program, not a single 1 or a single 0 will differ. If the user requests a picture, every pixel will be at the exact same location, an interesting property in a time of deep fakes, where the authenticity of a picture can be difficult to ascertain.<br><br>This focus on using hashing functions to fetch data is called CONTENT addressing (because the content is hashed) as opposed to the aforementioned LOCATION addressing. I think you’ll agree, it’s way more secure that way.<br><br>That being said, there’s another important property that content addressing unlocks. And it’s…</p>
+
+
+
+<p><strong>Efficiency & Speed: The Digital Lamborghini</strong><br><br>There’s something missing from the explanation above which you might have already picked up on if you were exceptionally astute: since users ask for data based on the hash of its content instead of its location, how do we know where to find this data at all? Where IS the data? In which server exactly?</p>
+
+
+
+<p>The answer is that the data can be anywhere. IPFS is a peer-to-peer network in which ANYONE can contribute. You can think of it like BitTorrent, the protocol often used to distribute pirated movies and songs.</p>
+
+
+
+<p>And since anyone can distribute data, a user in the US, for example, doesn’t have to ask data to a faraway server in China, he can simply take this data from someone else near his geographical location, and vice-versa for the other way around. This is much more efficient, especially if the data is right next to the user, geographically speaking.<br><br>Suppose there is a room filled with 100 HTTP users and 100 IPFS users and they all want to go to codeclimbing.com (because it’s such a great blog! :D), how will their experiences differ?<br><br>The 100 HTTP users will make a request to the LOCATION of codeclimbing.com. Each of those requests, will go through the internet, bounce through a bunch of routers, until finally arriving at a server which is, in all probability, from Google and 1000s of kilometers away, the requested data is then sent from the server, bouncing back through a bunch of routers again, to finally arrive in the user’s hands.</p>
+
+
+
+<p>What does the request look like, from the point of view of the IPFS users? The 100 IPFS users make a request to the IPFS network for the hash of the data. What if someone in the room has the file? Why bother going through routers and to a potentially remote server? That geographically near user can share it with another user and that user can share it with another one, and another one.<br><br>Content addressing is clearly much more efficient location addressing in this case! And of course, it’s all done in secure manner.</p>
+
+
+
+<p><strong>On the Next Episode of….</strong></p>
+
+
+
+<p>It is possible to keep going deeper with those topics, but we will keep it at that for now. Hopefully, you had a good taste of what the distributed internet has to offer!<br><br>Come back next week and we will continue this discussion about how IPFS will solve two other problems of the Internet: centralisation and proneness to censorship.</p>
+
+
+
+<p><br></p>
+			</div>
+
+		
+		<footer class="entry-meta">
+			
+							<div class="post-end-widget-area">
+									</div>
+			
+							<div class="entry-meta-term-single">
+				
+				<span class="entry-meta-categories"><span class="term-icon"><i class="fa fa-folder-open"></i></span> <a href="../category/ipfs/index.html" rel="tag">IPFS</a>   </span>
+
+									<span class="entry-meta-tags"><span class="term-icon"><i class="fa fa-tags"></i></span> <a href="../tag/internet/index.html" rel="tag">internet</a>, <a href="../tag/ipfs/index.html" rel="tag">IPFS</a>, <a href="../tag/security/index.html" rel="tag">security</a>, <a href="../tag/web/index.html" rel="tag">web</a></span>
+					
+				<div style="float:right;"></div>
+			</div>
+
+					</footer>
+	</article>
+				
+                                
+				<nav class="nav-single">
+					<div class="wrapper-navigation-below">
+						
+	<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../why-the-internet-is-falling-apart-and-the-need-for-ipfs/index.html" rel="prev"><span class="meta-nav"><i class="fa fa-angle-double-left"></i></span> Why the Internet is Falling Apart and the Need for IPFS</a></div><div class="nav-next"><a href="../the-ipfs-holy-grail-part-2-decentralisation-and-censorship-resistance/index.html" rel="next">The IPFS Holy Grail Part 2: Decentralisation and Censorship Resistance <span class="meta-nav"><i class="fa fa-angle-double-right"></i></span></a></div></div>
+	</nav>					</div>
+				</nav>
+                
+                
+				
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			2 thoughts on “<span>The IPFS Holy Grail Part 1: A More Secure and Efficient Internet</span>”		</h2>
+
+		<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-2">
+			<article id="comment-2" class="comment">
+				<header class="comment-meta comment-author vcard">
+					<img alt="" src="https://secure.gravatar.com/avatar/836515550f0e5587f38c36146328b51e?s=44&d=mm&r=g" srcset="https://secure.gravatar.com/avatar/836515550f0e5587f38c36146328b51e?s=88&d=mm&r=g 2x" class="avatar avatar-44 photo" height="44" width="44"><cite><b class="fn">기 영진</b> </cite><a href="../the-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/#comment-2"><time datetime="2020-03-17T14:32:20+00:00">March 17, 2020 at 2:32 pm</time></a>				</header>
+
+				
+				<section class="comment-content comment">
+					<p>감사합니다.</p>
+									</section>
+
+				<div class="reply">
+									</div>
+			</article>
+			<ol class="children">
+		<li class="comment byuser comment-author-batonenbois bypostauthor odd alt depth-2" id="li-comment-3">
+			<article id="comment-3" class="comment">
+				<header class="comment-meta comment-author vcard">
+					<img alt="" src="https://secure.gravatar.com/avatar/7e14b364d3f5f18b5e719e1f443af39e?s=44&d=mm&r=g" srcset="https://secure.gravatar.com/avatar/7e14b364d3f5f18b5e719e1f443af39e?s=88&d=mm&r=g 2x" class="avatar avatar-44 photo" height="44" width="44"><cite><b class="fn">TheCodeClimber</b> <span>Post author</span></cite><a href="../the-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/#comment-3"><time datetime="2020-03-17T16:26:16+00:00">March 17, 2020 at 4:26 pm</time></a>				</header>
+
+				
+				<section class="comment-content comment">
+					<p>Glad it was useful to you!</p>
+									</section>
+
+				<div class="reply">
+									</div>
+			</article>
+			</li>
+</ol>
+</li>
+		</ol>
+
+		
+				<p class="nocomments">Comments are closed.</p>
+		
+	
+	<div class="wrapper-form-comments">
+		</div>
+
+</div>
+
+			
+		</div>
+	</div>
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="mc4wp_form_widget-2" class="widget widget_mc4wp_form_widget"><h3 class="widget-title"><span class="widget-title-tab">Subscribe by Email!</span></h3><script>(function() {
+	window.mc4wp = window.mc4wp || {
+		listeners: [],
+		forms: {
+			on: function(evt, cb) {
+				window.mc4wp.listeners.push(
+					{
+						event   : evt,
+						callback: cb
+					}
+				);
+			}
+		}
+	}
+})();
+</script><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-80 mc4wp-form-theme mc4wp-form-theme-blue" method="post" data-id="80" data-name="Subscribers Form"><div class="mc4wp-form-fields"><p>
+    <input type="text" name="FNAME" placeholder="First Name" required="">
+</p>
+<p>
+		<input type="email" name="EMAIL" placeholder="Email Address" required>
+</p>
+
+<p>
+	<input type="submit" value="SUBSCRIBE!">
+</p></div><label style="display: none !important;">Leave this field empty if you're human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off"></label><input type="hidden" name="_mc4wp_timestamp" value="1587335060"><input type="hidden" name="_mc4wp_form_id" value="80"><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1"><div class="mc4wp-response"></div></form></aside>		</div>
+		</div>
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+			<div class="credits credits-left">
+			Copyright 2020			</div>
+
+			<div class="credits credits-center">
+						</div>
+
+			<div class="credits credits-right">
+			<a href="https://galussothemes.com/wordpress-themes/ribosome">Ribosome</a> by GalussoThemes.com<br>
+			Powered by<a href="https://wordpress.org/" title="Semantic Personal Publishing Platform"> WordPress</a>
+			</div>
+		</div>
+	</footer>
+</div>
+
+	<div class="ir-arriba"><i class="fa fa-arrow-up"></i></div>
+	<script>(function() {function maybePrefixUrlField() {
+	if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+		this.value = "http://" + this.value;
+	}
+}
+
+var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+if (urlFields) {
+	for (var j=0; j < urlFields.length; j++) {
+		urlFields[j].addEventListener('blur', maybePrefixUrlField);
+	}
+}
+})();</script><script type="text/javascript" src="../wp-content/themes/ribosome/js/navigation.js"></script>
+<script type="text/javascript" src="../wp-content/themes/ribosome/js/ribosome-scripts-functions.js"></script>
+<script type="text/javascript" src="../wp-content/plugins/mailchimp-for-wp/assets/js/forms.min.js"></script>
+
+</body>
+</html>

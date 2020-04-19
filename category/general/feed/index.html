@@ -12,28 +12,112 @@
 	<atom:link href="http://OFFLINEZIP.wpshocategory/general/feed/" rel="self" type="application/rss+xml" />
 	<link>https://OFFLINEZIP.wpsho</link>
 	<description>Samuele Agostinelli&#039;s Blog - Reaching the Heights</description>
-	<lastBuildDate>Mon, 02 Mar 2020 03:11:00 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 13 Apr 2020 01:44:54 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
 	<sy:updateFrequency>
 	1	</sy:updateFrequency>
-	<generator>https://wordpress.org/?v=5.3.2</generator>
-	<item>
-		<title>Welcome, and thanks for all the fish!</title>
-		<link>http://OFFLINEZIP.wpshohello-world/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=hello-world</link>
-				<comments>http://OFFLINEZIP.wpshohello-world/#comments</comments>
-				<pubDate>Mon, 09 Dec 2019 03:23:09 +0000</pubDate>
-		<dc:creator><![CDATA[batonenbois]]></dc:creator>
-				<category><![CDATA[General]]></category>
+	<generator>https://wordpress.org/?v=5.4</generator>
 
+<image>
+	<url>http://OFFLINEZIP.wpshowp-content/uploads/2020/03/cropped-favicon-32x32.png</url>
+	<title>General &#8211; Code Climbing</title>
+	<link>https://OFFLINEZIP.wpsho</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>What&#8217;s in a CID? Multi, Multi, Multi&#8230;</title>
+		<link>http://OFFLINEZIP.wpshowhats-in-a-cid-multi-multi-multi/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=whats-in-a-cid-multi-multi-multi</link>
+					<comments>http://OFFLINEZIP.wpshowhats-in-a-cid-multi-multi-multi/#respond</comments>
+		
+		<dc:creator><![CDATA[TheCodeClimber]]></dc:creator>
+		<pubDate>Mon, 13 Apr 2020 01:41:54 +0000</pubDate>
+				<category><![CDATA[General]]></category>
+		<guid isPermaLink="false">http://OFFLINEZIP.wpsho?p=91</guid>
+
+					<description><![CDATA[Every piece of data on IPFS can be referenced through its CID, which stands for Content IDentifier. You might have have spotted some while navigating the IPFS jungle. They look... <a href="http://OFFLINEZIP.wpshowhats-in-a-cid-multi-multi-multi/">Read more &#187;</a>]]></description>
+										<content:encoded><![CDATA[
+<figure class="wp-block-image size-large is-resized"><img src="http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-1024x681.jpg" alt="content-identifier" class="wp-image-93" width="784" height="521" srcset="http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-1024x681.jpg 1024w, http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-300x199.jpg 300w, http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-768x511.jpg 768w, http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-1536x1021.jpg 1536w, http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-2048x1362.jpg 2048w, http://OFFLINEZIP.wpshowp-content/uploads/2020/04/white-product-label-1111319-624x415.jpg 624w" sizes="(max-width: 784px) 100vw, 784px" /></figure>
+
+
+
+<p>Every piece of data on IPFS can be referenced through its CID, which stands for Content IDentifier. You might have have spotted some while navigating the IPFS jungle. They look like this: Qmd286K6pohQcTKYqnS1YhWrCiS4gz7Xi34sdwMe9USZ7u and this QmYf4sT9KbtW3ZCKoX8DdgJy9tDKVAUjbPTBi525RNR29V. And also this: bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi.<br></p>
+
+
+
+<p>But what are they made of? How to understand their composition? CIDs are said to be multihash, multicodec and multibase.<br>Multi-what? In this short article, we&#8217;ll explain each of those terms so you can better understand CIDs.<br><br><br><strong>CIDs are&#8230; Multihash</strong><br>As has been explained on a previous <a href="http://OFFLINEZIP.wpshothe-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/">article</a>, IPFS uses cryptographic hashes to identify data. Cryptographic hashes are in essence mathematical formulae that create a unique fingerprint for a data.<br></p>
+
+
+
+<p>A popular cryptographic algorithm to generate such hashes is SHA2-256. SHA2-256 creates a hash of a length of 256 bits. It&#8217;s awesome and very useful today, but will it still be useful 10 years from now, when computing devices will become more powerful and where maybe quantum computing renders this particular algorithm useless?<br><br>This scenario is not not completely unheard of since some hash functions, such as MD5 and SHA-1, were eventually rendered useless.</p>
+
+
+
+<p>So which algorithm should IPFS use, knowing that eventually the algorithm could be broken? The solution is to use a multihash.</p>
+
+
+
+<p><br>The multihash is very simple. It consists of an identifier for the hashing function used, the length of the hashing function and then the hash itself.</p>
+
+
+
+<p>The hashing function used is determined thanks to a table that everyone agrees on, where we assign a number to all possible hashing funtions.</p>
+
+
+
+<p>So the multihash ends up looking like this: &lt;hashing function identifier&gt;&lt;length of the hash&gt;&lt;the hash&gt;<br>In the case of a SHA2-256 hash, this is &lt;SHA2-256&gt;&lt;256 bits in length&gt;&lt;001010101010&#8230;&gt;.<br><br>Awesome! Now our content identifiers are future-proof! If we want to change the hashing function, we can!<br><br>But what if we could get a little more information from our CID? Like what the data represents?<br><br>That where the next part comes in&#8230;<br><br><strong>CIDs are&#8230; Multicodec</strong></p>
+
+
+
+<p>We want to add more information to our CID so that we may have a better idea of the type of data. Is it a JSON data? CBOR? Something else?<br><br>So what we will do is very simple, we&#8217;ll just add more data in front of our multihash which will describe the codec according to a <a href="https://github.com/multiformats/multicodec/blob/master/table.csv">table</a>. This works in the same manner as the identifier of the hashing function for the multihash.</p>
+
+
+
+<p>So now, our CID looks like this:<br><code>&lt;codec identifier>&lt;multihash></code><br><br>The CID is just a long series of bits that are self-describing. First, the multicodec which describes the type of the data. Then, the multihash, as explained earlier.<br><br>But there&#8217;s more&#8230;<br><br><strong>CIDs are&#8230; Multibase</strong><br>Originally, IPFS CIDs were described in <a href="https://en.wikipedia.org/wiki/Base58">base58</a> which is the same base which encodes bitcoin addresses.<br>But of course, we could be using all kind of bases such as base 32 so, once again, we need to add more data in front of our CID. We now add the multibase, which just tells us the base which will encode the CID.<br><br><code>&lt;multibase>base(&lt;multicodex>&lt;multihash>)</code><br><br>Okay, so that&#8217;s it with prefixing data, right? We are done?<br><br>No&#8230; We need to do some history about CIDs first, before we can understand the last bit of information to add.</p>
+
+
+
+<p><strong>V1 vs V0</strong></p>
+
+
+
+<p>At the beginning of IPFS, there weren&#8217;t multibases or multicodecs. All the CIDs were multihashes only.<br>We call those CIDs version 0. Then later, the IPFS project decided to improve the CIDs and add the multicodec and the multibase also. And thus Version 1 replaced Version 0.<br><br>So how do we differentiate between Version 0 and Version 1 CIDs? How do we tell if a CID is of an upcoming hypothethical version 2? Or even version 3?<br><br>That&#8217;s why from Vversion 1 and onward it was decided to add the Version to all CIDs. We will now put it right after the multibase.<br>So now CIDs look like this:<br><br><code>&lt;multibase&gt;base(&lt;CID version&gt;&lt;multicodec&gt;&lt;multihash&gt;)</code></p>
+
+
+
+<p><strong>BAFY vs Qm</strong><br><br>To help you synthesise this information, here&#8217;s an awesome tool that will allow you to analyse CIDs and each of their components: <a href="https://cid.ipfs.io/">https://cid.ipfs.io/</a><br><br>What I want you to do is to plug this version 0 CID in the tool: Qmd286K6pohQcTKYqnS1YhWrCiS4gz7Xi34sdwMe9USZ7u<br><br>As you might notice, the multicodec and the multibase is <code>implicit</code>. Why is that? Because they didn&#8217;t exist for version 0 CIDs! Therefore, we just assume what they are.</p>
+
+
+
+<p>At the bottom of the page, you will see a hash starting with <code>bafy...</code> this hash is the equivalent CID for version 1. A neat trick to differentiate v0 and v1 CIDs is to look at the first letters. If it starts with Qm, it is probably a v0 CID. If it starts with bafy, it is probably a v1 CID.<br><br>Finally, plug this version 1 CID into the tool: bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi.<br><br>The tool with now show us the base and codec according to the format described above.<br><br><strong>Congrats!</strong><br><br>Congrats! You are now a master of CIDs! You understand the ins and out of IPFS CIDs and can describe each component.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://OFFLINEZIP.wpshowhats-in-a-cid-multi-multi-multi/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Welcome, and thanks for all the fish!</title>
+		<link>http://OFFLINEZIP.wpshowelcome-and-thanks-for-all-the-fish/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=welcome-and-thanks-for-all-the-fish</link>
+					<comments>http://OFFLINEZIP.wpshowelcome-and-thanks-for-all-the-fish/#comments</comments>
+		
+		<dc:creator><![CDATA[TheCodeClimber]]></dc:creator>
+		<pubDate>Sun, 01 Mar 2020 03:23:09 +0000</pubDate>
+				<category><![CDATA[General]]></category>
 		<guid isPermaLink="false">http:/?p=1</guid>
-				<description><![CDATA[Welcome to my programming blog! I have no clue how you stumbled here, but am happy you did. In ten years from now, you will be bragging to your friends... <a href="http://OFFLINEZIP.wpshohello-world/">Read more &#187;</a>]]></description>
-								<content:encoded><![CDATA[
+
+					<description><![CDATA[Welcome to my programming blog! I have no clue how you stumbled here, but am happy you did. In ten years from now, you will be bragging to your friends... <a href="http://OFFLINEZIP.wpshowelcome-and-thanks-for-all-the-fish/">Read more &#187;</a>]]></description>
+										<content:encoded><![CDATA[
 <p>Welcome to my programming blog!<br><br>I have no clue how you stumbled here, but am happy you did. In ten years from now, you will be bragging to your friends that you read the Code Climbing blog before anyone else did, before it was cool. You&#8217;ll be the most hipster of hipsters and your mom will be proud of you.<br><br>This is my personal blog. It is mine and no one else&#8217;s. I want it to be awesome of course, but also personal above that. So, I&#8217;ll only talk about things that interest me. Let&#8217;s hope the stars are aligned regarding what interests me and what interests you. More important than that, however, I hope my enthusiasm can travel through the internet, find where you live, come out of the screen screaming with a knife and kiss you on the cheeks.<br><br>So stay tuned for awesome (yes!) articles about web development and decentralised technologies. I would be happy if you learned something new reading my blog posts. I&#8217;ll share thoughts, ideas, struggles, talk about interesting technologies and tutorials.<br><br>Topics that might appear include frontend web development with React, backend web development and articles about cool interesting defi or decentralised tech like Ethereum, IPFS, bitcoin, etc&#8230;<br><br>I also enjoy actual rock climbing in addition to programming. It is a perfect analogy for our short lives in which we should always strive for more, whatever &#8220;more&#8221; might mean for you.<br><br>The goal is the write regularly so as to improve my writing chops and in so doing enrich the lives of others with interesting information and maybe even inspire you in the process. That way we can both be reaching new heights in our lives and finally get on top of that ever increasing mountain.<br><br>So come back regularly to see what&#8217;s new! Cheers!!!</p>
 ]]></content:encoded>
-							<wfw:commentRss>http://OFFLINEZIP.wpshohello-world/feed/</wfw:commentRss>
-		<slash:comments>1</slash:comments>
-							</item>
+					
+					<wfw:commentRss>http://OFFLINEZIP.wpshowelcome-and-thanks-for-all-the-fish/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
 	</channel>
 </rss>

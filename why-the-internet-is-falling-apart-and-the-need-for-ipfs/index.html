@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Why the Internet is Falling Apart and the Need for IPFS – Code Climbing</title>
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+<link href="https://fonts.gstatic.com" crossorigin rel="preconnect">
+
+
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.10.4';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-40477212-4';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-40477212-4', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+<style type="text/css" id="kt_global_css_variables">
+:root {
+  --Denim: #1B6AC1;
+  --PictonBlue: #63B0E4;
+}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="../wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-theme-css" href="../wp-includes/css/dist/block-library/theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="mc4wp-form-themes-css" href="../wp-content/plugins/mailchimp-for-wp/assets/css/form-themes.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-fonts-css" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-style-css" href="../wp-content/themes/ribosome/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="ribosome-block-style-css" href="../wp-content/themes/ribosome/css/blocks.css" type="text/css" media="all">
+
+<link rel="stylesheet" id="dashicons-css" href="../wp-includes/css/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="../wp-content/themes/ribosome/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+<style id="kt_central_palette_gutenberg_css" type="text/css">.has-central-palette-1-color{color:#1B6AC1}.has-central-palette-1-background-color{background-color:#1B6AC1}.has-central-palette-2-color{color:#63B0E4}.has-central-palette-2-background-color{background-color:#63B0E4}
+</style>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"http:\/\/PLACEHOLDER.wpsho","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js"></script>
+<script type="text/javascript" src="../wp-includes/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../wp-includes/js/jquery/jquery-migrate.min.js"></script>
+
+
+
+
+
+
+
+
+
+	<style type="text/css">
+		a {color: #0073AA;}
+	a:hover {color: #0073AA;}
+	.social-icon-wrapper a:hover {color: #0073AA;}
+	.toggle-search {color: #0073AA;}
+	.prefix-widget-title {color: #0073AA;}
+	.sub-title a:hover {color:#0073AA;}
+	.entry-content a:visited,.comment-content a:visited {color:#0073AA;}
+	button, input[type="submit"], input[type="button"], input[type="reset"] {background-color:#0073AA !important;}
+	.bypostauthor cite span {background-color:#0073AA;}
+	.entry-header .entry-title a:hover {color:#0073AA ;}
+	.archive-header {border-left-color:#0073AA;}
+	.main-navigation .current-menu-item > a,
+	.main-navigation .current-menu-ancestor > a,
+	.main-navigation .current_page_item > a,
+	.main-navigation .current_page_ancestor > a {color: #0073AA;}
+	.main-navigation li a:hover  {color: #0073AA;}
+
+	.widget-area .widget a:hover {
+		color: #0073AA !important;
+	}
+	footer[role="contentinfo"] a:hover {
+		color: #0073AA;
+	}
+	.author-info a {color: #0073AA;}
+	.entry-meta a:hover {
+	color: #0073AA;
+	}
+	.format-status .entry-header header a:hover {
+		color: #0073AA;
+	}
+	.comments-area article header a:hover {
+		color: #0073AA;
+	}
+	a.comment-reply-link:hover,
+	a.comment-edit-link:hover {
+		color: #0073AA;
+	}
+	.currenttext, .paginacion a:hover {background-color:#0073AA;}
+	.aside{border-left-color:#0073AA !important;}
+	blockquote{border-left-color:#0073AA;}
+	.logo-header-wrapper{background-color:#0073AA;}
+	h3.cabeceras-fp {border-bottom-color:#0073AA;}
+	.encabezados-front-page {background-color:#0073AA;}
+	.icono-caja-destacados {color: #0073AA;}
+	.enlace-caja-destacados:hover {background-color: #0073AA;}
+	h2.comments-title {border-left-color:#0073AA;}
+	/* Gutenberg */
+	.has-theme-color-color,
+	a.has-theme-color-color:hover {
+		color: #0073AA;
+	}
+	.has-theme-color-background-color {
+		background-color:#0073AA;
+	}
+
+	
+			.blog-info-sin-imagen {background-color: #0073AA;}
+	
+			.widget-title-tab{
+			background-color:#0073AA;
+			color:#fff;
+		}
+		.widget-title-tab a.rsswidget{color:#fff !important;}
+		h3.widget-title { border-bottom:2px solid #0073AA;}
+	
+	
+			.main-navigation {border-top:2px solid #0073AA}
+	
+			.logo-header-wrapper {
+			padding: 21px 14px;
+			padding: 1.5rem 1rem;
+		}
+	
+	
+	
+	
+		body.custom-font-enabled {font-family: "Open Sans", Arial, Verdana;}
+
+			@media screen and (min-width: 768px) {
+			#primary {float:left;}
+			#secondary {float:right;}
+			.site-content {
+				border-left: none;
+				padding-left:0;
+				padding-right: 24px;
+				padding-right:1.714285714285714rem;
+			}
+
+		}
+		@media screen and (min-width: 960px) {
+			.site-content {
+				border-right: 1px solid #e0e0e0;
+			}
+		}
+	
+	@media screen and (min-width: 768px) {
+			.excerpt-wrapper{border-left:2px solid #0073AA;}
+	
+	
+		}
+	</style>
+
+	<style type="text/css" id="ribosome-header-css">
+			.site-header h1 a,
+		.site-header h2 {
+			color: #eaeaea;
+		}
+		</style>
+	<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #afafaf; }
+</style>
+	<link rel="icon" href="../wp-content/uploads/2020/03/cropped-favicon-32x32.png" sizes="32x32">
+<link rel="icon" href="../wp-content/uploads/2020/03/cropped-favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="../wp-content/uploads/2020/03/cropped-favicon-180x180.png">
+<meta name="msapplication-TileImage" content="../wp-content/uploads/2020/03/cropped-favicon-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			.logo-header-wrapper {
+	background-color: black;
+	max-height: 300px;
+	padding: 0;
+	padding-top: 10px;
+}
+
+.header-image {
+	width: auto;
+	max-height: 300px
+}		</style>
+		</head>
+
+<body class="post-template-default single single-post postid-33 single-format-standard custom-background wp-embed-responsive custom-font-enabled single-author">
+
+<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar">
+		
+		<div class="boton-menu-movil"><i class="fa fa-align-justify"></i></div>
+
+		
+		<div class="toggle-search"><i class="fa fa-search"></i></div>
+		<div class="social-icon-wrapper">
+			
+			
+			
+			
+			
+			
+			
+			
+					</div>
+	</div>
+
+	<div class="wrapper-search-top-bar">
+		<div class="search-top-bar">
+				<div>
+		<form method="get" id="searchform-toggle" action="http://OFFLINEZIP.wpsho/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search" name="s" id="s">
+			<input type="submit" name="submit" id="btn-search" value="Search">
+		</form>
+    </div>		</div>
+	</div>
+			<div style="position:relative">
+				
+<div id="menu-movil">
+	<div class="search-form-movil">
+		<form method="get" id="searchform-movil" action="http://OFFLINEZIP.wpsho/">
+			<label for="s" class="assistive-text">Search</label>
+			<input type="search" class="txt-search-movil" placeholder="Search..." name="s" id="s">
+			<input type="submit" name="submit" id="btn-search-movil" value="Search">
+		</form>
+	</div>
+	<div class="menu-movil-enlaces">
+		<div class="nav-menu"><ul>
+<li><a href="../index.html">Home</a></li><li class="page_item page-item-11"><a href="../contact/index.html">Contact</a></li>
+</ul></div>
+	</div>
+
+	<div class="social-icon-wrapper-movil">
+			
+			
+			
+			
+			
+			
+			
+			
+					</div>	
+</div>
+			</div>
+			<div class="logo-header-wrapper" style="text-align:center;">
+			<a href="../index.html"><img src="../wp-content/uploads/2020/03/cropped-Code-Climbing-scaled-2.jpg" class="header-image" width="2000" height="1034" alt="Code Climbing"></a>
+			</div>
+
+			
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<a class="assistive-text" href="#content" title="Skip to content">Skip to content</a>
+			<div class="nav-menu"><ul>
+<li><a href="../index.html">Home</a></li><li class="page_item page-item-11"><a href="../contact/index.html">Contact</a></li>
+</ul></div>
+		</nav>
+
+	</header>
+
+	<div id="main" class="wrapper">
+
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-33" class="post-33 post type-post status-publish format-standard has-post-thumbnail hentry category-ipfs tag-essay tag-ipfs tag-web">
+						<header class="entry-header">
+					<div class="entry-title-subtitle">
+													<h1 class="entry-title">Why the Internet is Falling Apart and the Need for IPFS</h1>
+						
+						
+						<div class="sub-title">
+							<div class="autor-fecha">
+								<span class="autor-in-full-posts"><i class="fa fa-user"></i> <span class="author vcard"><a class="fn" rel="author" href="../author/batonenbois/index.html">TheCodeClimber</a></span></span>
+								<span class="fecha-in-full-posts">
+									  <i class="fa fa-calendar-o"></i> <time class="entry-date published" datetime="2020-03-09T02:09:59+00:00">March 9, 2020</time> <time class="updated" style="display:none;" datetime="2020-03-30T01:53:25+00:00">March 30, 2020</time>								</span>
+								<span class="comments-in-full-posts">
+									  <i class="fa fa-comment-o"></i> <span>Comments Off<span class="screen-reader-text"> on Why the Internet is Falling Apart and the Need for IPFS</span></span>								</span>
+							</div>
+						</div>
+					</div>
+				</header>
+		
+		
+					<div class="sub-title-widget-area">
+							</div>
+		
+		
+			<div class="entry-content">
+				
+<figure class="wp-block-image size-large"><img src="../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709-1024x576.jpg" alt="" class="wp-image-74" srcset="../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709-1024x576.jpg 1024w,../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709-300x169.jpg 300w,../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709-768x432.jpg 768w,../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709-624x351.jpg 624w,../wp-content/uploads/2020/03/abandoned-airplane-apocalypse-crash-6709.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px"><figcaption>Yes, the internet is collapsing just like that!</figcaption></figure>
+
+
+
+<p>IPFS is fascinating. Expect to hear a lot more about this groundbreaking new tech in this blog. Over the upcoming weeks and months, we’ll discuss its philosophical underpinnings, why it even exists, what it consists of, how all of its pieces connect together and how to develop on top of it. All of it.<br><br>All. Of. It.<br><br>It’s going to be a wild ride and we’ll all be enriched by participating in the conversation. Yet, before we do any of that, here’s a question of the utmost importance:<br><br><strong>WTF is IPFS?</strong><strong><br></strong>Seriously, wtf is it? We’re dealing with complex tech here and discussing IPFS is like opening a can of worms with a black hole spitting fire from its event horizon. Yet, fundamentally, IPFS has a simple, yet audacious aim: <em>to re-architecture the entire internet by replacing http</em>.<br><br></p>
+
+
+
+<p>Addresses on websites are often prefixed by HTTP. The goal of IPFS is to completely replace the HTTP protocol as the foundational layer of the internet.<br><br>You’ve heard it right. The whole web. In fact, our current version of the web is sometimes called Web2, and IPFS, its natural development, Web3.<br><br>But why re-architecture the whole web? Isn’t it fine as it is?<br><br>HELL NO!<br><br>The web is not fine! In fact, you might already be impacted by its design flaws.</p>
+
+
+
+<p><strong>So, what’s wrong with the status quo of the web?</strong><br><br><strong><em>The current internet is SLOW and cannot support the upcoming wave of innovations and users</em></strong><strong>.</strong><br>The internet seriously needs more bandwidth. Think about the streaming 8k videos. We already need fast internet for that, but what about 16k and beyond? The demands on the web keep increasing and, let me tell you one thing, serving such content costs big $$$.<br><br></p>
+
+
+
+<p>Companies like facebook, google and others, spend billions to support their web architecture and deliver its content to you. The costs are offloaded to users of course in various ways of course, and many applications that could have been useful for humanity cannot see the light of day because of this barrier.<br></p>
+
+
+
+<p>But big files aren’t the only issue affecting the web. Think about the proliferation of devices connected to the internet: your computer, your phone, your tablet, even the television. As an increasing amount of devices are connected to the internet, so is the overhead required to serve those them.<br><br></p>
+
+
+
+<p>And to make matters worse, the amount of devices connected to the web is expected to keep increasing. Not only are we talking about the masses of users coming from newly industrialized countries such as India, but from new concepts such as the internet of things. The internet of things aims to connect everything that’s around you, whether it’s the cars, the door of your house, the lights, the energy meters, etc… That’s an even bigger load on the internet.<br><br>We need an alternative that will scale exponentially, be efficient and be blazing fast.<br></p>
+
+
+
+<p>We need IPFS.<br><br><strong><em>The other problem is security.</em></strong> How do I know that the content I am asking for is the content I asked for? What if an entity tampered with, let’s say, an image?<br></p>
+
+
+
+<p>It may sound trivial at first glance, but the more technology progresses, new threats such as <a href="https://en.wikipedia.org/wiki/Deepfake">deep fakes</a>, will highlight this problem.<br><br>Yet there are more immediate threats than that. How do I know the website I am connecting to is the right one, and not a phishing attack by a malicious hacker? Currently, we have a system of certificate authority in place to prevent such events to occur, yet they require trust in a <a href="https://www.infoworld.com/article/2623829/weaknesses-in-ssl-certification-exposed-by-com">third-party that can easily be compromised.<br><br></a>The current system is fundamentally flawed.<br><br><strong><em>Another important problem with the internet is that it is heavily centralized. </em></strong>Let’s take the example of the monolithic facebook. Surely, such massive companies operated by the combined brainpower of our planet’s most brilliant engineers should work all the time and never crash…<a href="https://downdetector.com/status/facebook/map/">think again</a>.<br><br></p>
+
+
+
+<p>Even facebook cannot be spared from breaking down and when that happens we are hit with the 404 page we all are so familiar with. The fundamental problem is that our current web implementation is based on the client-server model. Basically, a client, the browser, asks for data to a central server, such as facebook’s servers, and the server supplies the data.<br><br>This works wonderfully when no problem occurs, but when there’s a sudden influx of users, or a natural catastrophe, a hack, or even a simple bug in the code… It will crash.<br></p>
+
+
+
+<p>And <em>nobody</em> can access their content anymore.<br><br><strong>Finally, the internet is prone to censorship.</strong> You might not care that much about this aspect. In fact, the reasons cited above should be more than enough to convince anyone that the internet needs to be fixed. Yet, it’s worth taking a moment and think about how much the internet influences us and the power such influence confers to internet censorship.<br><br></p>
+
+
+
+<p>We are informed by the internet, we socialize on the internet, we bank on, we play on the internet and we work on the internet. One would be pained to find an area of life the web did not encroach upon.</p>
+
+
+
+<p><br>Internet censorship could mean one of two things. Content could be censored by a megacorporation or even a government. That would be equivalent to letting someone else do the thinking for you by deciding which content and, therefore, which thoughts will be allowed in your mind.<br></p>
+
+
+
+<p>That is scary in itself, yet the second type of censorship is even scarier: the ability to censor humans out of the internet. Imagine a content creator cut off from Youtube, or Medium, or Twitter. He loses his livelihood. Imagine you are removed from linkedIn, you cannot network anymore. Imagine you cannot use email? As the internet becomes ever more prevalent, so are the consequences of being disconnected from it.<br><br><strong>The solution is IPFS</strong><strong><br></strong>IPFS is an amalgamation of innovations that put together will solve many of humanity’s tech problems. It is similar to bitcoin in that sense, except that, instead of revolutionizing finance, it will revolutionize the internet and, by doing so, our lives.<br><br><strong>Stay tuned for more!</strong><strong><br></strong>In the next series of articles, we’ll see what solutions IPFS proposes to each of those problems. It will be a great way for you to be introduced to the terminology and concepts of IPFS.<br></p>
+			</div>
+
+		
+		<footer class="entry-meta">
+			
+							<div class="post-end-widget-area">
+									</div>
+			
+							<div class="entry-meta-term-single">
+				
+				<span class="entry-meta-categories"><span class="term-icon"><i class="fa fa-folder-open"></i></span> <a href="../category/ipfs/index.html" rel="tag">IPFS</a>   </span>
+
+									<span class="entry-meta-tags"><span class="term-icon"><i class="fa fa-tags"></i></span> <a href="../tag/essay/index.html" rel="tag">essay</a>, <a href="../tag/ipfs/index.html" rel="tag">IPFS</a>, <a href="../tag/web/index.html" rel="tag">web</a></span>
+					
+				<div style="float:right;"></div>
+			</div>
+
+					</footer>
+	</article>
+				
+                                
+				<nav class="nav-single">
+					<div class="wrapper-navigation-below">
+						
+	<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="../welcome-and-thanks-for-all-the-fish/index.html" rel="prev"><span class="meta-nav"><i class="fa fa-angle-double-left"></i></span> Welcome, and thanks for all the fish!</a></div><div class="nav-next"><a href="../the-ipfs-holy-grail-part-1-a-more-secure-and-efficient-internet/index.html" rel="next">The IPFS Holy Grail Part 1: A More Secure and Efficient Internet <span class="meta-nav"><i class="fa fa-angle-double-right"></i></span></a></div></div>
+	</nav>					</div>
+				</nav>
+                
+                
+				
+<div id="comments" class="comments-area">
+
+	
+	
+	<div class="wrapper-form-comments">
+		</div>
+
+</div>
+
+			
+		</div>
+	</div>
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="mc4wp_form_widget-2" class="widget widget_mc4wp_form_widget"><h3 class="widget-title"><span class="widget-title-tab">Subscribe by Email!</span></h3><script>(function() {
+	window.mc4wp = window.mc4wp || {
+		listeners: [],
+		forms: {
+			on: function(evt, cb) {
+				window.mc4wp.listeners.push(
+					{
+						event   : evt,
+						callback: cb
+					}
+				);
+			}
+		}
+	}
+})();
+</script><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-80 mc4wp-form-theme mc4wp-form-theme-blue" method="post" data-id="80" data-name="Subscribers Form"><div class="mc4wp-form-fields"><p>
+    <input type="text" name="FNAME" placeholder="First Name" required="">
+</p>
+<p>
+		<input type="email" name="EMAIL" placeholder="Email Address" required>
+</p>
+
+<p>
+	<input type="submit" value="SUBSCRIBE!">
+</p></div><label style="display: none !important;">Leave this field empty if you're human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off"></label><input type="hidden" name="_mc4wp_timestamp" value="1587335068"><input type="hidden" name="_mc4wp_form_id" value="80"><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1"><div class="mc4wp-response"></div></form></aside>		</div>
+		</div>
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+			<div class="credits credits-left">
+			Copyright 2020			</div>
+
+			<div class="credits credits-center">
+						</div>
+
+			<div class="credits credits-right">
+			<a href="https://galussothemes.com/wordpress-themes/ribosome">Ribosome</a> by GalussoThemes.com<br>
+			Powered by<a href="https://wordpress.org/" title="Semantic Personal Publishing Platform"> WordPress</a>
+			</div>
+		</div>
+	</footer>
+</div>
+
+	<div class="ir-arriba"><i class="fa fa-arrow-up"></i></div>
+	<script>(function() {function maybePrefixUrlField() {
+	if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+		this.value = "http://" + this.value;
+	}
+}
+
+var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+if (urlFields) {
+	for (var j=0; j < urlFields.length; j++) {
+		urlFields[j].addEventListener('blur', maybePrefixUrlField);
+	}
+}
+})();</script><script type="text/javascript" src="../wp-content/themes/ribosome/js/navigation.js"></script>
+<script type="text/javascript" src="../wp-content/themes/ribosome/js/ribosome-scripts-functions.js"></script>
+<script type="text/javascript" src="../wp-content/plugins/mailchimp-for-wp/assets/js/forms.min.js"></script>
+
+</body>
+</html>
